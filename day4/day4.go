@@ -62,10 +62,23 @@ func SliceContainElem(n_slice []int, elem int) bool {
 }
 
 func ContainDupes(n_slice []int) bool {
-	unique_n_slice := make([]int, len(n_slice))
-	copy(unique_n_slice, n_slice)
 	unique := Unique(n_slice)
-	return len(unique) < len(n_slice)
+
+	if len(unique) == len(n_slice) {
+		return false
+	}
+	for _, unique_elem := range unique {
+		count_elem := 0
+		for _, elem := range n_slice {
+			if unique_elem == elem {
+				count_elem += 1
+			}
+		}
+		if count_elem == 2 {
+			return true
+		}
+	}
+	return false
 }
 
 func main() {
